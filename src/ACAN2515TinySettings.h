@@ -15,7 +15,7 @@
 
 class ACAN2515TinySettings {
 //--- Enumerations
-  public: typedef enum {NormalMode, ListenOnlyMode, LoopBackMode} ACAN2515RequestedMode ;
+  public: typedef enum {NormalMode, ListenOnlyMode, LoopBackMode} RequestedMode ;
 
 //--- Constructor for a given baud rate
   public: explicit ACAN2515TinySettings (const uint32_t inQuartzFrequency, // In Hertz
@@ -54,7 +54,7 @@ class ACAN2515TinySettings {
 
 
 //--- Requested mode
-  public: ACAN2515RequestedMode mRequestedMode = NormalMode ;
+  public: RequestedMode mRequestedMode = NormalMode ;
 
 
 //--- Receive buffer size
