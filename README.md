@@ -18,7 +18,7 @@ The driver supports many bit rates: for a 16 MHz quartz, the CAN bit timing calc
 
 ### Demo Sketch
 
-> The demo sketch is in the `examples/LoopBackDemo` directory.
+> The demo sketch is in the `examples/TinyLoopBackDemo` directory.
 
 Configuration is a four-step operation.
 
