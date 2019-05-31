@@ -1,15 +1,15 @@
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 // A CAN driver for MCP2515
 // by Pierre Molinaro
 // https://github.com/pierremolinaro/acan2515
 //
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 #include <ACAN2515TinySettings.h>
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 //    CAN Settings
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 ACAN2515TinySettings::ACAN2515TinySettings (const uint32_t inQuartzFrequency,
                                             const uint32_t inWhishedBitRate,
@@ -71,7 +71,7 @@ mQuartzFrequency (inQuartzFrequency) {
   }
 } ;
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 static uint32_t bitrateFrom (const uint32_t inQuartzFrequency, // In Hertz
                              const uint8_t inBitRatePrescaler,  // 1...64
@@ -83,7 +83,7 @@ static uint32_t bitrateFrom (const uint32_t inQuartzFrequency, // In Hertz
   return inQuartzFrequency / inBitRatePrescaler / TQ / 2 ;
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 ACAN2515TinySettings::ACAN2515TinySettings (const uint32_t inQuartzFrequency, // In Hertz
                                             const uint8_t inBitRatePrescaler,  // 1...64
@@ -101,21 +101,21 @@ mBitRatePrescaler (inBitRatePrescaler),
 mBitRateClosedToDesiredRate (true) {
 } ;
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 uint32_t ACAN2515TinySettings::actualBitRate (void) const {
   const uint32_t TQCount = 1 /* Sync Seg */ + mPropagationSegment + mPhaseSegment1 + mPhaseSegment2 ;
   return mQuartzFrequency / mBitRatePrescaler / TQCount / 2 ;
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 bool ACAN2515TinySettings::exactBitRate (void) const {
   const uint32_t TQCount = 1 /* Sync Seg */ + mPropagationSegment + mPhaseSegment1 + mPhaseSegment2 ;
   return mQuartzFrequency == (mDesiredBitRate * mBitRatePrescaler * TQCount * 2) ;
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 uint32_t ACAN2515TinySettings::ppmFromDesiredBitRate (void) const {
   const uint32_t TQCount = 1 /* Sync Seg */ + mPropagationSegment + mPhaseSegment1 + mPhaseSegment2 ;
@@ -125,7 +125,7 @@ uint32_t ACAN2515TinySettings::ppmFromDesiredBitRate (void) const {
   return (uint32_t) ((diff * ppm) / W) ;
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 uint32_t ACAN2515TinySettings::samplePointFromBitStart (void) const {
   const uint32_t TQCount = 1 /* Sync Seg */ + mPropagationSegment + mPhaseSegment1 + mPhaseSegment2 ;
@@ -134,7 +134,7 @@ uint32_t ACAN2515TinySettings::samplePointFromBitStart (void) const {
   return (samplePoint * partPerCent) / TQCount ;
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 uint16_t ACAN2515TinySettings::CANBitSettingConsistency (void) const {
   uint16_t errorCode = 0 ; // Means no error
@@ -174,4 +174,4 @@ uint16_t ACAN2515TinySettings::CANBitSettingConsistency (void) const {
   return errorCode ;
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------

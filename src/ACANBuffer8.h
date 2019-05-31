@@ -1,4 +1,4 @@
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 // A CAN driver for MCP2517FD CAN Controller in CAN 2.0B mode
 // by Pierre Molinaro
 // https://github.com/pierremolinaro/acan2517
@@ -6,16 +6,16 @@
 // This file is common with the acan2515 library
 // https://github.com/pierremolinaro/acan2515
 //
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 #ifndef ACAN_BUFFER_8_CLASS_DEFINED
 #define ACAN_BUFFER_8_CLASS_DEFINED
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 #include <CANMessage.h>
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 class ACANBuffer8 {
 
@@ -47,7 +47,7 @@ class ACANBuffer8 {
   private: uint8_t mSize ;
   private: uint8_t mReadIndex ;
   private: uint8_t mCount ;
-  private: uint8_t mPeakCount ; // > mSize if overflow did occur
+  private: uint16_t mPeakCount ; // > mSize if overflow did occur
 
 //······················································································································
 // Accessors
@@ -55,13 +55,14 @@ class ACANBuffer8 {
 
   public: inline uint8_t size (void) const { return mSize ; }
   public: inline uint8_t count (void) const { return mCount ; }
-  public: inline uint8_t peakCount (void) const { return mPeakCount ; }
+  public: inline uint16_t peakCount (void) const { return mPeakCount ; }
 
 //······················································································································
 // initWithSize
 //······················································································································
 
   public: void initWithSize (const uint8_t inSize) {
+    delete [] mBuffer ;
     mBuffer = new CANMessage [inSize] ;
     mSize = inSize ;
     mReadIndex = 0 ;
@@ -76,7 +77,7 @@ class ACANBuffer8 {
   public: bool append (const CANMessage & inMessage) {
     const bool ok = mCount < mSize ;
     if (ok) {
-      uint8_t writeIndex = mReadIndex + mCount ;
+      uint16_t writeIndex = ((uint16_t) mReadIndex) + (uint16_t) mCount ;
       if (writeIndex >= mSize) {
         writeIndex -= mSize ;
       }
@@ -114,6 +115,6 @@ class ACANBuffer8 {
   private: ACANBuffer8 & operator = (const ACANBuffer8 &) ;
 } ;
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//----------------------------------------------------------------------------------------------------------------------
 
 #endif
