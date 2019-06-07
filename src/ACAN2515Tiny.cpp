@@ -265,7 +265,7 @@ uint16_t ACAN2515Tiny::internalBeginOperation (const ACAN2515TinySettings & inSe
   //  Bit 7-6: SJW - 1
   //  Bit 5-0: BRP - 1
     const uint8_t cnf1 =
-      (inSettings.mSJW << 6) /* SJW */ |
+      ((inSettings.mSJW - 1) << 6) /* SJW */ |
       ((inSettings.mBitRatePrescaler - 1) << 0) /* BRP */
     ;
     mSPI.transfer (cnf1) ;
