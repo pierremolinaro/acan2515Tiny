@@ -1,5 +1,5 @@
 //——————————————————————————————————————————————————————————————————————————————
-//  ACAN2515 Demo in loopback mode, using hardware SPI, with an external interrupt
+//  ACAN2515Tiny Demo in loopback mode, using hardware SPI, with an external interrupt
 //  This code shows how to define and use receive filters
 //——————————————————————————————————————————————————————————————————————————————
 

@@ -1,5 +1,5 @@
 //——————————————————————————————————————————————————————————————————————————————
-//  ACAN2515 Demo in loopback mode
+//  ACAN2515Tiny Demo in loopback mode
 //  This sketch is designed for a Teensy 3.5, using SPI0 (named SPI)
 //——————————————————————————————————————————————————————————————————————————————
 

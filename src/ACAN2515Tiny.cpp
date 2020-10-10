@@ -596,12 +596,9 @@ uint8_t ACAN2515Tiny::receiveErrorCounter (void) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool ACAN2515Tiny::tryToSend (const CANMessage & inMessage) {
-//--- Workaround: the Teensy 3.5 / 3.6 "SPI.usingInterrupt" bug
-//    https://github.com/PaulStoffregen/SPI/issues/35
-  #if (defined (__MK64FX512__) || defined (__MK66FX1M0__))
-    noInterrupts () ;
-  #endif
- //---
+//--- Bug fix in 1.0.4 (thanks to Fergus Duncan): interrupts were only disabled for Teensy boards
+  noInterrupts () ;
+//---
   mSPI.beginTransaction (mSPISettings) ;
     bool ok = mTXBIsFree ;
     if (ok) { // Transmit buffer and TXB are both free: transmit immediatly
@@ -611,9 +608,7 @@ bool ACAN2515Tiny::tryToSend (const CANMessage & inMessage) {
       ok = mTransmitBuffer.append (inMessage) ;
     }
   mSPI.endTransaction () ;
-  #if (defined (__MK64FX512__) || defined (__MK66FX1M0__))
-    interrupts () ;
-  #endif
+  interrupts () ;
   return ok ;
 }
 

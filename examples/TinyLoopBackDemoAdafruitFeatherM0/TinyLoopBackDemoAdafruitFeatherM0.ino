@@ -1,5 +1,5 @@
 //——————————————————————————————————————————————————————————————————————————————
-//  ACAN2515 Demo in loopback mode for Adafruit Feather M0
+//  ACAN2515Tiny Demo in loopback mode for Adafruit Feather M0
 //——————————————————————————————————————————————————————————————————————————————
 
 #include <ACAN2515Tiny.h>

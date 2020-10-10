@@ -1,6 +1,6 @@
 //——————————————————————————————————————————————————————————————————————————————
-//  ACAN2515 / ACAN Demo
-//  ACAN2515 uses hardware SPI and an external interrupt pin
+//  ACAN2515Tiny / ACAN Demo
+//  ACAN2515Tiny uses hardware SPI and an external interrupt pin
 //  This sketch runs only on a Teensy 3.x
 //  It uses the Teensy 3.x builtin CAN0 interface for testing intensive
 //  communication with a MCP2515 CAN controller.
