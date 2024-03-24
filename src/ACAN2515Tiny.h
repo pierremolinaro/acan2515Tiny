@@ -1,20 +1,20 @@
-//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // A CAN driver for MCP2515
 // by Pierre Molinaro
 // https://github.com/pierremolinaro/acan2515Tiny
 //
-//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 
 #pragma once
 
-//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 
-#include <ACANBuffer8.h>
+#include <ACAN2515Tiny_ACANBuffer8.h>
 #include <ACAN2515TinySettings.h>
-#include <MCP2515ReceiveFilters.h>
+#include <ACAN2515Tiny_ReceiveFilters.h>
 #include <SPI.h>
 
-//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 
 class ACAN2515Tiny {
 //--- Constructor
@@ -80,6 +80,7 @@ class ACAN2515Tiny {
 
 //--- Transmitting messages
   public: bool tryToSend (const CANMessage & inMessage) ;
+  public: bool sendBufferNotFull (void) ;
 
 //--- Driver transmit buffer
   private: ACANBuffer8 mTransmitBuffer ;
@@ -127,8 +128,8 @@ class ACAN2515Tiny {
   public: uint8_t transmitErrorCounter (void) ;
 
 //--- No Copy
-  private: ACAN2515Tiny (const ACAN2515Tiny &) ;
-  private: ACAN2515Tiny & operator = (const ACAN2515Tiny &) ;
+  private: ACAN2515Tiny (const ACAN2515Tiny &) = delete ;
+  private: ACAN2515Tiny & operator = (const ACAN2515Tiny &) = delete ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
